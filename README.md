@@ -34,7 +34,8 @@ force-app/main/default/
    `LoanApplicationService.qualify`).
 2. **KYC gating** — no loan application may move past `Submitted` unless the
    client's KYC status is `Verified` within the last 365 days.
-3. **Dispute SLA** — disputes over $500 or involving card-present fraud are
-   escalated to a Case with a 48-hour SLA; all others get 10 business days.
+3. **Dispute SLA** — disputes over $500, or with a fraud reason code **and**
+   card present, are escalated to a Case with a 48-hour SLA; all others get
+   10 business days.
 4. **Onboarding dedupe** — onboarding matches existing clients by SIN hash +
    date of birth before creating a new `Account`.

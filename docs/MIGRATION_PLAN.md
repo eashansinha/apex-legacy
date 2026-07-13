@@ -19,7 +19,7 @@ Spring events replacing record triggers.
 | `ClientOnboardingService.onboard` | Dedupe by SIN hash + DOB before creating client; enqueues KYC | `ClientOnboardingService` + unique DB constraint on `(sin_hash, date_of_birth)` |
 | `KYCVerificationService` (`@future` callout) | Async identity-provider verification | `KycVerificationService` using `@Async` + `RestClient`; retry via Spring Retry |
 | `ClientSelector` (SOQL) | Client lookups, stale-KYC scans | Spring Data JPA repository queries |
-| `TransactionDisputeService` | Dispute intake; >$500 or card-present fraud → 48h SLA Case, else 10 business days | `DisputeService` + `EscalationService` |
+| `TransactionDisputeService` | Dispute intake; >$500 or (fraud reason code **and** card present) → 48h SLA Case, else 10 business days | `DisputeService` + `EscalationService` |
 | Custom objects `Loan_Application__c`, `Transaction_Dispute__c` | Data model | JPA entities `LoanApplication`, `TransactionDispute` (Flyway migrations) |
 
 ## 3. Business Rules That MUST Survive (verification checklist)

@@ -55,7 +55,7 @@ public class ClientOnboardingService {
         client.setEmail(req.email());
         client.setPhone(req.phone());
         client.setProvince(req.province());
-        repository.save(client);
+        client = repository.save(client);
 
         kycQueue.enqueue(client);
         return client;

@@ -89,4 +89,11 @@ class LoanQualificationServiceTest {
             new BigDecimal("300000"), new BigDecimal("0.0749"), 300);
         assertEquals(2215.02, payment.doubleValue(), 0.5);
     }
+
+    @Test
+    void zeroRatePaymentIsPrincipalOverMonths() {
+        BigDecimal payment = LoanQualificationService.monthlyPayment(
+            new BigDecimal("300000"), BigDecimal.ZERO, 300);
+        assertEquals(1000.0, payment.doubleValue(), 0.001);
+    }
 }

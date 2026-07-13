@@ -72,6 +72,9 @@ public class LoanQualificationService {
 
     /** Standard amortized monthly payment; parity with Apex monthlyPayment(). */
     static BigDecimal monthlyPayment(BigDecimal principal, BigDecimal annualRate, int months) {
+        if (annualRate.signum() == 0) {
+            return principal.divide(BigDecimal.valueOf(months), MC);
+        }
         BigDecimal r = annualRate.divide(BigDecimal.valueOf(12), MC);
         BigDecimal factor = BigDecimal.ONE.add(r).pow(months, MC);
         return principal.multiply(r.multiply(factor, MC), MC)

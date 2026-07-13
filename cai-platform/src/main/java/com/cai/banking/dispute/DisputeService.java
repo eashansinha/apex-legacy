@@ -57,7 +57,7 @@ public class DisputeService {
 
     static boolean requiresUrgentEscalation(BigDecimal amount, String reasonCode, boolean cardPresent) {
         return amount.compareTo(ESCALATION_AMOUNT) > 0
-            || (FRAUD_CODES.contains(reasonCode) && cardPresent);
+            || (reasonCode != null && FRAUD_CODES.contains(reasonCode) && cardPresent);
     }
 
     static LocalDate addBusinessDays(LocalDate start, int businessDays) {

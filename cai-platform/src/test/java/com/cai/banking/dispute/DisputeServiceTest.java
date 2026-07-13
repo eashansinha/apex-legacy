@@ -58,4 +58,13 @@ class DisputeServiceTest {
         assertEquals(LocalDate.of(2026, 7, 24), due);
         assertNotEquals(DayOfWeek.SATURDAY, due.getDayOfWeek());
     }
+
+    @Test
+    void nullReasonCodeGetsStandardSlaWithoutCrashing() {
+        TransactionDispute dispute = service.fileDispute(
+            UUID.randomUUID(), "4242", new BigDecimal("100"), null, true);
+
+        assertEquals(Status.OPEN, dispute.getStatus());
+        assertNull(dispute.getEscalationCaseId());
+    }
 }
